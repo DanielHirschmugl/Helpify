@@ -31,7 +31,7 @@ public class User implements UserDetails {
     private String lastname;
     @Column(unique = true)
     private String email;
-    private int phonenumber;
+    private String phonenumber;
     private String password;
     private double feedback;
     private String beschreibung;
