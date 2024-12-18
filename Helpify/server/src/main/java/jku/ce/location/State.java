@@ -12,6 +12,7 @@ import java.util.List;
 @Table(name = "_state")
 public class State {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,5 +22,4 @@ public class State {
 
     @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<FederalState> federalStates;
-
 }
