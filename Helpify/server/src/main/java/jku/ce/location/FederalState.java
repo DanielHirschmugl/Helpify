@@ -3,6 +3,7 @@ package jku.ce.location;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -26,5 +27,17 @@ public class FederalState {
     @OneToMany(mappedBy = "federalState", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Region> regions;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FederalState that = (FederalState) o;
+        return Objects.equals(name, that.name) && Objects.equals(state, that.state);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 

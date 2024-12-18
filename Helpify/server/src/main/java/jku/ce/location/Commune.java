@@ -3,6 +3,8 @@ package jku.ce.location;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -19,16 +21,29 @@ public class Commune {
     private String name;
 
     @Column(nullable = false)
-    private int postalCode;
+    private String postalCode;
 
     @Column(nullable = false)
     private String street;
 
     @Column(nullable = false)
-    private int number;
+    private String number;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Commune commune = (Commune) o;
+        return Objects.equals(name, commune.name) && Objects.equals(postalCode, commune.postalCode) && Objects.equals(region, commune.region);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 

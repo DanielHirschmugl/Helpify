@@ -9,5 +9,7 @@ import java.util.Optional;
 public interface RegionRepository extends JpaRepository<Region, Long> {
     Optional<Region> findById(Long id);
     Optional<Region> findByName(String name);
+
+    Optional<Region> findByNameAndFederalState(String defaultRegion, FederalState federalState);
 }
 

@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface CommuneRepository extends JpaRepository<Commune, Long> {
     Optional<Commune> findById(Long id);
     Optional<Commune> findByName(String name);
-    Optional<Commune> findByPostalCode(int postalCode);
+    Optional<Commune> findByPostalCode(String postalCode);
+    Optional<Commune> findByNameAndPostalCode(String name, String postalCode);
 }

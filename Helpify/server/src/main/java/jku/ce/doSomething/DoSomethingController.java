@@ -1,6 +1,7 @@
 package jku.ce.doSomething;
 
 import jku.ce.config.JwtService;
+import jku.ce.doSomething.rest.AddLocationRequest;
 import jku.ce.doSomething.rest.AddTaskRequest;
 import jku.ce.doSomething.rest.GetNearestTasksResponse;
 import jku.ce.exceptions.NoAccessException;
@@ -40,6 +41,16 @@ public class DoSomethingController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return doSomethingService.addTask(token, request);
+    }
+
+    @PostMapping("/addLocation")
+    public ResponseEntity<Void> addLocation(@RequestHeader("Authorization") String authorization, AddLocationRequest request) throws NoAccessException {
+
+        String token = authorization.substring(7);
+        if (!jwtService.isTokenValid(token)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return doSomethingService.addLocation(token, request);
     }
 
 }
