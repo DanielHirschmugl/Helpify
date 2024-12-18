@@ -3,6 +3,7 @@ package jku.ce.location;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -25,5 +26,18 @@ public class Region {
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Commune> communes;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Region region = (Region) o;
+        return Objects.equals(name, region.name) && Objects.equals(federalState, region.federalState);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 
