@@ -5,6 +5,7 @@ import jku.ce.exceptions.NoAccessException;
 import jku.ce.exceptions.UserAlreadyExistsException;
 import jku.ce.exceptions.UserNotFoundException;
 import jku.ce.exceptions.WrongInputException;
+import jku.ce.location.*;
 import jku.ce.user.Role;
 import jku.ce.user.User;
 import jku.ce.user.UserRepository;

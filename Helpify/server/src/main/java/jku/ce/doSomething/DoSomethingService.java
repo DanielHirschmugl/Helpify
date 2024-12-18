@@ -42,6 +42,7 @@ public class DoSomethingService {
         User user = userRepository.findByUsername(jwtService.extractUsername(token)).get();
 
         List<Task> taskList = taskRepository.findAll().stream()
+                /*
                 .sorted(Comparator.comparingInt((Task x) -> {
 
                     if (x.getUser().getLocation().getCommune().equals(user.getLocation().getCommune())) {
@@ -61,6 +62,8 @@ public class DoSomethingService {
                     }
                     return 5;
                 }))
+                */
+
                 .toList();
 
             List<GetNearestTasksHelp> helpList = new ArrayList<>();
@@ -73,69 +76,6 @@ public class DoSomethingService {
             }
 
             return new GetNearestTasksResponse(helpList);
-
-        /* Optional:
-            List<Task> taskList = new ArrayList<>();
-
-            List<Task> sameCommuneList = taskRepository.findAll().stream()
-                    .filter(x ->{
-                        if ((x.getUser().getLocation().getCommune().equals(user.getLocation().getCommune()))
-                        && (x.getUser().getLocation().getRegion().equals(user.getLocation().getRegion()))
-                        && (x.getUser().getLocation().getFederalState().equals(user.getLocation().getFederalState()))
-                        && (x.getUser().getLocation().getState().equals(user.getLocation().getState()))) {
-                            return true;
-                        }else {
-                            return false;
-                        }
-                    })
-                    .toList();
-
-            List<Task> sameRegionList = taskRepository.findAll().stream()
-                    .filter(x ->{
-                        if ((!x.getUser().getLocation().getCommune().equals(user.getLocation().getCommune()))
-                                && (x.getUser().getLocation().getRegion().equals(user.getLocation().getRegion()))
-                                && (x.getUser().getLocation().getFederalState().equals(user.getLocation().getFederalState()))
-                                && (x.getUser().getLocation().getState().equals(user.getLocation().getState()))) {
-                            return true;
-                        }else {
-                            return false;
-                        }
-                    })
-                    .toList();
-
-            List<Task> sameFederalStateList = taskRepository.findAll().stream()
-                    .filter(x ->{
-                        if ((!x.getUser().getLocation().getCommune().equals(user.getLocation().getCommune()))
-                                && (!x.getUser().getLocation().getRegion().equals(user.getLocation().getRegion()))
-                                && (x.getUser().getLocation().getFederalState().equals(user.getLocation().getFederalState()))
-                                && (x.getUser().getLocation().getState().equals(user.getLocation().getState()))) {
-                            return true;
-                        }else {
-                            return false;
-                        }
-                    })
-                    .toList();
-
-            List<Task> sameStateList = taskRepository.findAll().stream()
-                    .filter(x ->{
-                        if ((!x.getUser().getLocation().getCommune().equals(user.getLocation().getCommune()))
-                                && (!x.getUser().getLocation().getRegion().equals(user.getLocation().getRegion()))
-                                && (!x.getUser().getLocation().getFederalState().equals(user.getLocation().getFederalState()))
-                                && (x.getUser().getLocation().getState().equals(user.getLocation().getState()))) {
-                            return true;
-                        }else {
-                            return false;
-                        }
-                    })
-                    .toList();
-
-            taskList.addAll(sameCommuneList);
-            taskList.addAll(sameRegionList);
-            taskList.addAll(sameFederalStateList);
-            taskList.addAll(sameStateList);
-
-            return taskList;
-         */
     }
 
     public ResponseEntity<Void> addTask(String token, AddTaskRequest request) throws NoAccessException {

@@ -25,6 +25,5 @@ public class Region {
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Commune> communes;
-
 }
 
